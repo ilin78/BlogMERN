@@ -72,5 +72,5 @@ app.listen(PORT, console.log(`port ${PORT}`));
 
 Далее отправляем данные с помощью метода POST в программе Postman
 
-![](https://github.com/dedmosay/BlogMERN/tree/master/how/img/POST.jpg)
+![](https://github.com/dedmosay/BlogMERN/blob/master/how/img/POST.jpg)
 
