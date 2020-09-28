@@ -1,10 +1,26 @@
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/test', {useNewUrlParser: true, useUnifiedTopology: true});
 
-const Cat = mongoose.model('Cat', { name: String });
+import mongoose from "mongoose";
+import PostModel from './models/Post'
 
-const kitty = new Cat({ name: 'Zildjian' });
-kitty.save().then(() => console.log('meow'));
+mongoose.connect('mongodb://localhost:27017/blog');
+
+const post = new PostModel(
+    { 
+        title: "Тестовая запись",
+        text: "Just text"
+    }
+);
+
+post.save().then(() => console.log('OK'));
+
+
+
+// ,
+
+
+
+
+// {useNewUrlParser: true, useUnifiedTopology: true});
 
 
 // const express = require('express');

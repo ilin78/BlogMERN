@@ -2,6 +2,8 @@
 
 # Как сделать сервер с POST и GET запросами
 
+Установить ```express``` и ```body-parser```
+
 Тестовые данные 
 
 ```json
@@ -81,3 +83,119 @@ app.listen(PORT, console.log(`port ${PORT}`));
 https://mongoosejs.com/
 
 Установим данную библиотеку и запустим тестовый код, а затем убедимся, что в базе данных появилась тестовая база данных ```test``
+
+```js
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/test', {useNewUrlParser: true, useUnifiedTopology: true});
+
+const Cat = mongoose.model('Cat', { name: String });
+
+const kitty = new Cat({ name: 'Zildjian' });
+kitty.save().then(() => console.log('meow'));
+```
+
+![](https://github.com/dedmosay/BlogMERN/blob/master/how/img/dbs.jpg)
+
+
+# Подключаем Babel, создаем модель
+
+Устанавливаем Babel с помощью npm 
+
+```npm install --save-dev babel-cli babel-core babel-preset-env babel-preset-stage-0 ```
+и дополнительно
+```npm install --save-dev babel-plugin-transform-object-rest-spread```
+
+Можно так же глобально установить babel (unix):
+```sudo npm install -g babel-cli```
+
+Установим значения в ```.preset```
+```js
+{
+    "presets": ["env", "stage-0"]
+}
+```
+
+Для проверки напишем в ES6
+```js
+const arr = [1,2,3,4,5];
+const result = arr.map(value => value * 2);
+
+console.log(result)
+```
+
+Запустим скрипт 
+>babel index.js -d dist
+
+В папке dist получим код ES5 
+
+```js
+"use strict";
+
+var arr = [1, 2, 3, 4, 5];
+var result = arr.map(function (value) {
+  return value * 2;
+});
+
+console.log(result);
+```
+
+
+# Склеиваем команды запуска и babel
+ 
+```js
+"build":"babel src -d dist",
+"start": "node dist/index.js",
+"build-start":"npm run build && npm start"
+```
+Это позволит работать одновременно с ES6 и использовать преймущества JS перед ES5 (такие как импорт и деструктуризации)
+> npm run build-start
+
+
+
+# Структура
+
+```src / models``` 
+- Post.js  - для работы со статьями
+
+```js
+import mongoose, { Schema } from "mongoose";
+const PostSchema = new Schema(
+    {
+        title: String,          // заголовок
+        text: String            // текст
+    }, 
+    {
+        timestamps: true        // дата
+    }
+);
+const Post = mongoose.model('Post', PostSchema)
+export default Post;
+```
+
+
+Теперь можем использовать эту схему и наполнять ```blog``` базу данных.
+```src / ``` 
+- index.js - основной скрипт
+```js
+import mongoose from "mongoose";
+import PostModel from './models/Post'
+
+mongoose.connect('mongodb://localhost:27017/blog');
+
+const post = new PostModel(
+    { 
+        title: "Тестовая запись",
+        text: "Just text"
+    }
+);
+
+post.save().then(() => console.log('OK')); // когда данные запишутся в БД, будет выполнено сообщение в консоль "OK"
+```
+
+Теперь, когда мы запустили программу, проверим БД.
+![](https://github.com/dedmosay/BlogMERN/blob/master/how/img/dbs-blog.jpg)
+
+Зайдем в базу ```use blog``` и убедимся в том, что база создалась.
+
+![](https://github.com/dedmosay/BlogMERN/blob/master/how/img/dbs-data.jpg)
+
