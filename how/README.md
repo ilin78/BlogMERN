@@ -74,3 +74,10 @@ app.listen(PORT, console.log(`port ${PORT}`));
 
 ![](https://github.com/dedmosay/BlogMERN/blob/master/how/img/POST.jpg)
 
+
+
+# Подлючаем базу данных
+
+https://mongoosejs.com/
+
+Установим данную библиотеку и запустим тестовый код, а затем убедимся, что в базе данных появилась тестовая база данных ```test``
