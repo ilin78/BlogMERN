@@ -41,6 +41,6 @@ app.post('/posts', function(req, res){
     console.log(data);
     posts.push(data);       // сохраняем эти данные в POST
     return res.send(posts);
-})
+});
 
 app.listen(PORT, console.log(`port ${PORT}`));
