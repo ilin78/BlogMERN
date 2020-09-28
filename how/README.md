@@ -199,3 +199,65 @@ post.save().then(() => console.log('OK')); // когда данные запиш
 
 ![](https://github.com/dedmosay/BlogMERN/blob/master/how/img/dbs-data.jpg)
 
+# CRUD + MONGO DB
+
+Теперь когда все готово, создадим запросы с POST, GET, DELETE, UPDATE
+
+Подключим библиотеки и PostModel
+
+```js
+import mongoose from 'mongoose';
+import express from 'express';
+import bodyParser from 'body-parser';
+
+import PostModel from './models/Post';
+
+const PORT = 3333;
+
+mongoose.connect('mongodb://localhost:27017/blog');
+
+const app = express();
+
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+```
+
+Добавим метод POST
+
+```js
+app.post('/posts', function(req, res){
+    const data = req.body;          // здесь будут появляться данные отправленные методом POST
+    
+    const post = new PostModel(     // c помощью Postman отправляем данные 
+        { 
+            title: data.title,  
+            text: data.text
+        }
+    );
+    
+    post.save().then(()=>{          // в случае успеха Postman получит .json - { status: "ok"}
+        res.send({ status: "ok"})
+    });
+});
+```
+Как видно данные были отправлены, и после записи в БД мы получили ответ об успешной операции.
+![](https://github.com/dedmosay/BlogMERN/blob/master/how/img/post-crud.jpg)
+
+Метод GET
+
+```js
+app.get('/posts', (req, res) => {
+    PostModel.find().then((err, posts) => {
+        if (err) {
+            res.send(err);
+        }
+        res.json(posts);
+    });
+});
+```
+
+Теперь проверим метод GET, как видно все получилось.
+![](https://github.com/dedmosay/BlogMERN/blob/master/how/img/get-crud.jpg)
+
+
+

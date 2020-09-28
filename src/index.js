@@ -1,37 +1,48 @@
+import mongoose from 'mongoose';
+import express from 'express';
+import bodyParser from 'body-parser';
 
-import mongoose from "mongoose";
-import PostModel from './models/Post'
+import PostModel from './models/Post';
+
+const PORT = 3333;
 
 mongoose.connect('mongodb://localhost:27017/blog');
 
-const post = new PostModel(
-    { 
-        title: "Тестовая запись",
-        text: "Just text"
-    }
-);
+const app = express();
 
-post.save().then(() => console.log('OK'));
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+ 
+app.post('/posts', function(req, res){
+    const data = req.body;          // здесь будут появляться данные отправленные методом POST
+    
+    const post = new PostModel(     // c помощью Postman отправляем данные 
+        { 
+            title: data.title,  
+            text: data.text
+        }
+    );
+    
+    post.save().then(()=>{          // в случае успеха Postman получит .json - { status: "ok"}
+        res.send({ status: "ok"})
+    });
+});
+
+
+app.get('/posts', (req, res) => {
+    PostModel.find().then((err, posts) => {
+        if (err) {
+            res.send(err);
+        }
+        res.json(posts);
+    });
+});
 
 
 
-// ,
 
 
 
-
-// {useNewUrlParser: true, useUnifiedTopology: true});
-
-
-// const express = require('express');
-// // позволяет серверу читать данные, которые были переданы методом POST
-// const bodyParser = require('body-parser'); 
-// const app = express();
-
-// app.use(bodyParser.urlencoded({extended: true}));
-// app.use(bodyParser.json());
-
-// const PORT = 3333;
 // const posts = [
 //     {
 //         title: "0 H W",
@@ -50,6 +61,9 @@ post.save().then(() => console.log('OK'));
 //         text: "Just text"
 //     }
 // ];
+
+
+
 // // get - получает 2 параметра (маршрут, анонимная функция([вся инфа о запросе], [хранит все методы для передачи ответа] ))
 // app.get('/posts', function(req, res) {
 //     return res.send(posts);
@@ -61,11 +75,6 @@ post.save().then(() => console.log('OK'));
 //     return res.send(posts[id]);
 // });
 
-// app.post('/posts', function(req, res){
-//     const data = req.body;  // здесь будут появляться данные отправленные методом POST
-//     console.log(data);
-//     posts.push(data);       // сохраняем эти данные в POST
-//     return res.send(posts);
-// });
 
-// app.listen(PORT, console.log(`port ${PORT}`));
+
+app.listen(PORT, console.log(`port ${PORT}`));
