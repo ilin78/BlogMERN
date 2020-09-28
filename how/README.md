@@ -1,6 +1,6 @@
 # BlogMERN
 
-#Как сделать сервер с POST и GET запросами
+# Как сделать сервер с POST и GET запросами
 
 Тестовые данные 
 
@@ -72,5 +72,5 @@ app.listen(PORT, console.log(`port ${PORT}`));
 
 Далее отправляем данные с помощью метода POST в программе Postman
 
-![](https://github.com/dedmosay/BlogMERN/how/img/POST.jpg)
+![](https://github.com/dedmosay/BlogMERN/tree/master/how/img/POST.jpg)
 
