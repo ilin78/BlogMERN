@@ -193,6 +193,7 @@ post.save().then(() => console.log('OK')); // когда данные запиш
 ```
 
 Теперь, когда мы запустили программу, проверим БД.
+
 ![](https://github.com/dedmosay/BlogMERN/blob/master/how/img/dbs-blog.jpg)
 
 Зайдем в базу ```use blog``` и убедимся в том, что база создалась.
@@ -241,6 +242,7 @@ app.post('/posts', function(req, res){
 });
 ```
 Как видно данные были отправлены, и после записи в БД мы получили ответ об успешной операции.
+
 ![](https://github.com/dedmosay/BlogMERN/blob/master/how/img/post-crud.jpg)
 
 Метод GET
@@ -257,7 +259,51 @@ app.get('/posts', (req, res) => {
 ```
 
 Теперь проверим метод GET, как видно все получилось.
+
 ![](https://github.com/dedmosay/BlogMERN/blob/master/how/img/get-crud.jpg)
 
+Метод DELETE
 
+```js
+app.delete('/posts/:id', (req, res) => {
+    PostModel.remove({
+        _id: req.params.id
+    }).then(post => {
+        if (post) {
+            res.json({status: "deleted"});
+        } else {
+            res.json({status: "error"});
+        }
+    });   
+});
+```
+
+Теперь удалим эту строку и получим результат.
+
+![](https://github.com/dedmosay/BlogMERN/blob/master/how/img/del-crud.jpg)
+![](https://github.com/dedmosay/BlogMERN/blob/master/how/img/del2-crud.jpg)
+
+
+
+Метод PUT
+
+```js
+app.put('/posts/:id', (req, res) => {
+    PostModel.findByIdAndUpdate(
+        req.params.id,      // поиск по id
+        {$set: req.body},   // свойство set - хранит новые данные
+        (err) => {
+            if(err) {
+                res.send(err)
+            }
+            res.json({status: "update"});
+        }
+    );
+});
+```
+
+Проверим метод PUT. Попробуем обновить и проверить результат.
+
+![](https://github.com/dedmosay/BlogMERN/blob/master/how/img/put-crud.jpg)
+![](https://github.com/dedmosay/BlogMERN/blob/master/how/img/put2-crud.jpg)
 
