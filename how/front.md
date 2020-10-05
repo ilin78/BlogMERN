@@ -30,16 +30,71 @@ modules: ['node_modules', path.resolve('./src')].contact(...
 
 # Структура проекта 
 
-Предпологается создать директиву из трех папок 
 
-1. Компоненты - components 
+```
+src
+│   index.js
+│   App.js
+│
+└───pages
+└───styles
+│   │    app.scss
+│   
+└───components
+    └───HeaderBlock
+    │   │   HeaderBlock.scss
+    │   │   index.jsx
+    │
+    │   index.js
+```
 
-* HeaderBlock:
-    * HeaderBlock.scss
-    * index.jsx
-    
-index.js
-2. Страницы - pages
-3. Стили - styles (глобальные стили) подключим их к index.js
 
+
+Компонент ```HeaderBlock.jsx``` будет получать данные (title, description, imageUrl}) из ```App.js```
+
+
+* HeaderBlock.jsx
+```jsx
+import React from 'react';
+
+import './HeaderBlock.scss'
+
+const HeaderBlock = ({title, description, imageUrl}) => {
+    return (
+        <div className="header-block" style={{backgroundImage: `url(${imageUrl})`}}>
+            <div className="container">
+                <div className="header-block__overlay"></div>
+                <div className="header-block__center">
+                    <h1>{title}</h1>
+                    <h3>{description}</h3>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export default HeaderBlock;
+```
+
+Пока нет redux, временно захардкодим
+* App.js
+```jsx
+import React from 'react';
+
+import { HeaderBlock } from 'components';
+function App() {
+  return (
+    <div className="App">
+      <HeaderBlock 
+        title="Заголовок Сайта"
+        description="Описание"
+        imageUrl="https://images.unsplash.com/photo-1601753657684-cefd5aa6f284?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80"
+      />
+      
+    </div>    
+  );
+}
+
+export default App;
+```
 
