@@ -30,6 +30,7 @@ modules: ['node_modules', path.resolve('./src')].contact(...
 
 # Структура проекта 
 
+Начальная структура проекта
 
 ```
 src
@@ -52,7 +53,7 @@ src
 
 Компонент ```HeaderBlock.jsx``` будет получать данные (title, description, imageUrl}) из ```App.js```
 
-
+Таким образом через деструктуризацию {...} будем брать любой компонент
 * HeaderBlock.jsx
 ```jsx
 import React from 'react';
@@ -76,7 +77,7 @@ const HeaderBlock = ({title, description, imageUrl}) => {
 export default HeaderBlock;
 ```
 
-Пока нет redux, временно захардкодим
+Пока нет redux, временно захардкодим данные
 * App.js
 ```jsx
 import React from 'react';

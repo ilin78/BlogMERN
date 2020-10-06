@@ -1,0 +1,44 @@
+.header-block {
+    display: flex; 
+    align-items: center;        // выравнивание по высоте
+    height: 450px;      
+    
+    justify-content: center;    // выравнивание по ширине
+    position: relative;
+
+
+    /*РЕЗИНОВОСТЬ КАРТИНКИ*/
+    background-position: center; // выровнить по центру осн картинку
+    background-size: cover;      // разместить картинку так чтобы застелить все пространство
+    background-repeat: no-repeat;
+    opacity: 0.8;
+
+    h1, 
+    h3 {
+        color: #fff;
+    }
+    h1 {
+        font-weight: 700;
+        font-size: 42px;
+    }
+    h3 {
+        font-size: 22px;
+        font-weight: 400;
+    }
+
+    /*СОЗДАНИЕ ТЕМНОГО СЛОЯ*/
+    &__overlay {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+    }
+    /*ПОМЕСТИТЬ ТЕКСТ НАД ТЕМНЫМ СЛОЕМ*/
+    &__center {
+        text-align: center;         // выравнивание относительно абзаца
+        position: relative;
+        text-shadow: 0px 0px 2px black, 1px 0 1px #999; /* Параметры тени */
+    }
+}
