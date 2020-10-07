@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { HeaderBlock, PostItem } from 'components';
+import { HeaderBlock, PostItem, AddForm } from 'components';
 function App() {
   return (
     <div className="App">
@@ -14,57 +14,15 @@ function App() {
       <div className="container">
 
         <div className="content">
-          <button>Add post</button>
+        <button>Add post</button>
         </div>
         <PostItem
-          _id="1"
-          title="Name Post"
-          create_At={''+new Date()}
+        _id="1"
+        title="Name Post"
+        create_At={''+new Date()}
         />
-
-
-        <form className="add-form">
-            <div className="add-form__row">
-              <h4>
-                <label className="title">Title</label>
-              </h4>
-              <input 
-                type="text"
-                className="form-control"
-                id="text"
-                placeholder="Name title"
-              />
-            </div>
-
-            <div className="add-form__row">
-              <h4>
-                <label className="image">Image URL</label>
-              </h4>
-              <input 
-                type="text"
-                className="form-control"
-                id="image"
-                placeholder="Enter image URL"
-              />
-            </div>
-
-            <div className="add-form__row">
-              <h4>
-                <label for="description">Description</label>
-              </h4>
-              <textarea 
-                rows="10"
-                className="form-control"
-                type="text"
-                id="description"
-                placeholder="Enter text"
-              />
-            </div>
-
-            <button type="submit"> Create </button>
-        </form>
-      </div>
-    
+        <AddForm/>
+      </div>  
     </div>    
   );
 }
