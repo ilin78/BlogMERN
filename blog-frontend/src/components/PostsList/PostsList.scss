@@ -1,0 +1,26 @@
+$color_blue:  rgb(69, 102, 250);
+
+.add-form {
+    margin: 60px auto;
+    padding: 0 300px;
+    &__row {
+        margin-bottom: 20px;
+    }
+}
+
+textarea, input {
+    font-size: 14px;
+    width: 1000px;
+    height: 30px;
+    border-radius: 4px;
+    border: 3px solid #aaa;
+
+    &:hover {
+        border: 3px solid $color_blue;
+        box-shadow: 0px 0px 1px $color_blue;
+    }
+}
+
+textarea {
+    height: 200px;
+}
