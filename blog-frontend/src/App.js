@@ -2,7 +2,7 @@ import React from 'react';
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import { HeaderBlock, PostsList, AddForm } from 'components';
+import { HeaderBlock, PostsList, AddForm, FullPost } from 'components';
 function App() {
   return (
     <div className="App"> 
@@ -16,7 +16,6 @@ function App() {
       <div className="container">
 
         <div className="content">
-        <button>Add post</button> 
         </div>
        
          {/* <AddForm/> */}
@@ -47,15 +46,23 @@ function App() {
               )}/> 
               
               
-              {/* <Route path="/post/:id" component={FullPost}/> */}
+              <Route path="/post/:id" exact component={() => (
+                <FullPost 
+                  title="Это первая статья"
+                  create_At={''+new Date()} 
+                />
+              )}/>
+              <Route path="/post/:id/edit" exact component={AddForm}/>
               {/* <Route path="/not-found" component={NotFound}/> */}
             </Switch>
           </div>
         </Router>
       </div>  
+      {/* <button>Add post</button>  */}
     </div>    
   );
 }
+
 
 export default App;
  
