@@ -1,0 +1,17 @@
+.full-post {
+    
+    .container {
+        padding: 0 300px;
+        justify-content: center;
+        margin:  auto;
+        min-width: 900px;
+    }
+    &__text {
+        font-size: 22px;
+        color: #000;
+    }
+    &__details{
+        margin-top: 20px;
+        opacity: 0.5;
+    }
+}

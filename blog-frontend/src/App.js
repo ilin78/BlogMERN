@@ -2,7 +2,7 @@ import React from 'react';
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import { HeaderBlock, PostsList, AddForm, FullPost } from 'components';
+import { HeaderBlock, PostsList, AddForm, FullPost, NotFound } from 'components';
 function App() {
   return (
     <div className="App"> 
@@ -53,7 +53,7 @@ function App() {
                 />
               )}/>
               <Route path="/post/:id/edit" exact component={AddForm}/>
-              {/* <Route path="/not-found" component={NotFound}/> */}
+              <Route path="*" component={NotFound}/>
             </Switch>
           </div>
         </Router>
